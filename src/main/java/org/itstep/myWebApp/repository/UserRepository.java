@@ -34,4 +34,17 @@ public class UserRepository {
         users.put(user.getId(), user);
     }
 
+    public User getById(Integer id){
+        try{
+            return users.get(id);
+        }catch (NullPointerException ex){
+            return null;
+        }
+    }
+
+    public void update(Integer id, User user){
+        user.setId(id);
+        users.put(id, user);
+    }
+
 }

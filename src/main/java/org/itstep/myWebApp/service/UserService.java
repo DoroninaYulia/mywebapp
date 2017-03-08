@@ -20,4 +20,8 @@ public class UserService {
     public void add(User user) {
         repository.add(user);
     }
+
+    public User getById(Integer id){return repository.getById(id);}
+
+    public void update(Integer id, User user){repository.update(id,user);}
 }

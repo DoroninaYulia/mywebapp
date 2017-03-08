@@ -14,6 +14,7 @@
         <td>Last name</td>
         <td>City</td>
         <td>Email</td>
+        <td colspan="2">Action</td>
     </tr>
     </thead>
 
@@ -41,6 +42,7 @@
             <td>${user.city}</td>
             <td>${user.email}</td>
             <td><a href="users?action=delete&id=${user.id}">DELETE</a></td>
+            <td><a href="users?action=update&id=${user.id}">UPDATE</a></td>
         </tr>
     </c:forEach>
 </table>
