@@ -18,29 +18,49 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
+        if (action == null) action = "getAll";
 
-        if (action == null) {
-            List<User> users = service.getAll();
-            req.setAttribute("userList", users);
-            req.getRequestDispatcher("userList.jsp").forward(req, resp);
-        } else if (action.equals("delete")) {
-            Integer id = Integer.valueOf(req.getParameter("id"));
-            service.delete(id);
-            resp.sendRedirect("users");
-        } else if (action.equals("create")) {
-            req.setAttribute("user", new User("name", "lastname", "city", "email"));
-            req.getRequestDispatcher("editUser.jsp").forward(req, resp);
+        switch (action) {
+            case "create":
+                req.setAttribute("user", new User("name", "lastname", "city", "email"));
+                req.getRequestDispatcher("editUser.jsp").forward(req, resp);
+                break;
+            case "delete":
+                Integer id = Integer.valueOf(req.getParameter("id"));
+                service.delete(id);
+                resp.sendRedirect("users");
+                break;
+            case "update":
+                id = Integer.valueOf(req.getParameter("id"));
+                User user = service.getById(id);
+                req.setAttribute("user", user);
+                req.getRequestDispatcher("editUser.jsp").forward(req, resp);
+                break;
+            case "getAll":
+                List<User> users = service.getAll();
+                req.setAttribute("userList", users);
+                req.getRequestDispatcher("userList.jsp").forward(req, resp);
+                break;
         }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String lastname = req.getParameter("lastname");
-        String city = req.getParameter("city");
-        String email = req.getParameter("email");
-        service.add(new User(name, lastname, city, email));
+
+        String id = req.getParameter("id");
+
+        User user = id.isEmpty() ? new User() : service.getById(Integer.valueOf(id));
+
+        user.setName(req.getParameter("name"));
+        user.setLastname(req.getParameter("lastname"));
+        user.setCity(req.getParameter("city"));
+        user.setEmail(req.getParameter("email"));
+
+        service.save(user);
 
         resp.sendRedirect("users");
+
     }
+
 }

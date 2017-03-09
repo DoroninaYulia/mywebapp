@@ -1,11 +1,7 @@
 package org.itstep.myWebApp.model;
 
 
-public class User {
-
-    private Integer id;
-
-    private String name;
+public class User extends Entity {
 
     private String lastname;
 

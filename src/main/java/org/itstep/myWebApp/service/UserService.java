@@ -17,7 +17,11 @@ public class UserService {
         repository.delete(id);
     }
 
-    public void add(User user) {
-        repository.add(user);
+    public void save(User user) {
+        repository.save(user);
+    }
+
+    public User getById(Integer id) {
+        return repository.getById(id);
     }
 }
