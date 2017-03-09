@@ -2,12 +2,19 @@ package org.itstep.myWebApp.service;
 
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UserService {
 
-    private UserRepository repository = new UserRepository();
+    private UserRepository repository/* = new UserRepository()*/;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public List<User> getAll() {
         return repository.getAll();

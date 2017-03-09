@@ -10,7 +10,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version.apache>1.8</java.version.apache>
+        <java.version.spring>4.3.7.RELEASE</java.version.spring>
     </properties>
 
     <dependencies>
@@ -26,6 +27,18 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${java.version.spring}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${java.version.spring}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -38,8 +51,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${java.version.apache}</source>
+                    <target>${java.version.apache}</target>
                 </configuration>
             </plugin>
         </plugins>
