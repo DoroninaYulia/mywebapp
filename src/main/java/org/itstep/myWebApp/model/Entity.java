@@ -1,6 +1,6 @@
 package org.itstep.myWebApp.model;
 
-public class Entity {
+abstract public class Entity {
 
     protected Integer id;
 
@@ -8,6 +8,22 @@ public class Entity {
 
     protected Entity() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
