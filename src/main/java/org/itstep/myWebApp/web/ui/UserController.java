@@ -39,7 +39,7 @@ public class UserController {
         return new ModelAndView("editUser", "user", service.getById(id));
     }
 
-    @RequestMapping(value = "/editUser")
+    @RequestMapping(value = "/edituser")
     public ModelAndView showForm(){
         return new ModelAndView("editUser", "user", new User());
     }
