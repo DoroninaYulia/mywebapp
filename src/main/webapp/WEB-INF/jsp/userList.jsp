@@ -30,6 +30,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href="users/create">Create new one</a>
+<a href="users/editUser">Create new one</a>
 </body>
 </html>

@@ -5,8 +5,11 @@ import org.itstep.myWebApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,32 +24,39 @@ public class UserController {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAll(Model model){
-        model.addAttribute("userList", service.getAll());
-        return "userList";
-    }
-
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(Model model){
-        model.addAttribute("user", new User());
-        return "editUser";
+    public ModelAndView getAll(){
+        return new ModelAndView("userList", "userList", service.getAll());
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(HttpServletRequest req){
-        Integer id = Integer.valueOf(req.getParameter("id"));
+    public ModelAndView delete(@RequestParam(value = "id") Integer id){
         service.delete(id);
-        return "redirect:/users";
+        return new ModelAndView("redirect:/users");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String update(HttpServletRequest req, Model model){
-        Integer id = Integer.valueOf(req.getParameter("id"));
-        model.addAttribute("user", service.getById(id));
-        return "editUser";
+    public ModelAndView update(@RequestParam(value = "id") Integer id){
+        return new ModelAndView("editUser", "user", service.getById(id));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/editUser")
+    public ModelAndView showForm(){
+        return new ModelAndView("editUser", "user", new User());
+    }
+
+    @RequestMapping(value= "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("user") User user){
+        service.save(user);
+        return "redirect:/users";
+    }
+
+/*    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(Model model){
+        model.addAttribute("user", new User());
+        return "editUser";
+    }*/
+
+/*    @RequestMapping(method = RequestMethod.POST)
     public String save(HttpServletRequest req){
         String id = req.getParameter("id");
         User user = id.isEmpty() ? new User() : service.getById(Integer.valueOf(id));
@@ -58,7 +68,6 @@ public class UserController {
         service.save(user);
 
         return "redirect:/users";
-    }
-
+    }*/
 
 }
