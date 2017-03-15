@@ -1,4 +1,4 @@
-package org.itstep.myWebApp.web;
+package org.itstep.myWebApp.web.servlet;
 
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.service.UserService;

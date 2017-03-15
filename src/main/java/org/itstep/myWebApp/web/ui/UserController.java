@@ -13,9 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Yulia on 13.03.2017.
- */
 @Controller
 @RequestMapping(value = "/users")
 public class UserController {
@@ -24,50 +21,30 @@ public class UserController {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getAll(){
+    public ModelAndView getAll() {
         return new ModelAndView("userList", "userList", service.getAll());
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView delete(@RequestParam(value = "id") Integer id){
+    public ModelAndView delete(@RequestParam(value = "id") Integer id) {
         service.delete(id);
         return new ModelAndView("redirect:/users");
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public ModelAndView update(@RequestParam(value = "id") Integer id){
+    public ModelAndView update(@RequestParam(value = "id") Integer id) {
         return new ModelAndView("editUser", "user", service.getById(id));
     }
 
-    @RequestMapping(value = "/edituser")
-    public ModelAndView showForm(){
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("user") User user) {
+        service.save(user);
+        return "redirect:/users";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ModelAndView create(@ModelAttribute("user") User user) {
         return new ModelAndView("editUser", "user", new User());
     }
-
-    @RequestMapping(value= "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("user") User user){
-        service.save(user);
-        return "redirect:/users";
-    }
-
-/*    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(Model model){
-        model.addAttribute("user", new User());
-        return "editUser";
-    }*/
-
-/*    @RequestMapping(method = RequestMethod.POST)
-    public String save(HttpServletRequest req){
-        String id = req.getParameter("id");
-        User user = id.isEmpty() ? new User() : service.getById(Integer.valueOf(id));
-
-        user.setName(req.getParameter("name"));
-        user.setLastname(req.getParameter("lastname"));
-        user.setCity(req.getParameter("city"));
-        user.setEmail(req.getParameter("email"));
-        service.save(user);
-
-        return "redirect:/users";
-    }*/
 
 }

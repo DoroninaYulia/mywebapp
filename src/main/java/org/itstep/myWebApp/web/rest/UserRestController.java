@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by student on 15.03.2017.
- */
-
 @RestController
 @RequestMapping(value = "/rest/users")
 public class UserRestController {
@@ -21,21 +17,33 @@ public class UserRestController {
     @Autowired
     private UserService service;
 
-    @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<User>> getAll(){
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getAll() {
         ResponseEntity<List<User>> entity = new ResponseEntity<>(service.getAll(), HttpStatus.OK);
         return entity;
     }
 
-    @DeleteMapping (value = "id", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable Integer id){
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 
-/*    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody User user){
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody User user, @PathVariable Integer id) {
+        user.setId(id);
         service.save(user);
     }
-   */
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void create(@RequestBody User user) {
+        service.save(user);
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getById(@PathVariable Integer id) {
+        return service.getById(id);
+    }
+
+    //@Request--, ResponseEntity<User>
 
 }

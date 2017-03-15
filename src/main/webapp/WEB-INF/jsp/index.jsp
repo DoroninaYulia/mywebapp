@@ -7,6 +7,5 @@
 </head>
 <body>
 <h1>Hello user! This is main page of your first web app.</h1>
-<h1>dfdffd</h1>
 </body>
 </html>
