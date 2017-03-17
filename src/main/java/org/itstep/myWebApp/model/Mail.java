@@ -15,6 +15,14 @@ public class Mail extends Entity {
     public Mail() {
     }
 
+    public Mail(String name, String text, String to, LocalDateTime created, Integer userId) {
+        this.name = name;
+        this.text = text;
+        this.to = to;
+        this.created = created;
+        this.userId = userId;
+    }
+
     public Mail(Integer id, String name, String text, String to, LocalDateTime created, Integer userId) {
         this.id = id;
         this.name = name;

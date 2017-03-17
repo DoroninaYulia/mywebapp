@@ -2,6 +2,7 @@ package org.itstep.myWebApp.web.rest;
 
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.service.UserService;
+import org.itstep.myWebApp.web.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,10 +41,8 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getById(@PathVariable Integer id) {
+    public User getById(@PathVariable Integer id){
         return service.getById(id);
     }
-
-    //@Request--, ResponseEntity<User>
 
 }

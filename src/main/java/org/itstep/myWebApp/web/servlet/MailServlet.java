@@ -17,6 +17,6 @@ public class MailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.getRequestDispatcher("/my.html").forward(req,resp);
-        resp.sendRedirect("my.html");
+        //resp.sendRedirect("my.html");
     }
 }
