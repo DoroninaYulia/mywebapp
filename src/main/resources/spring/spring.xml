@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
 
     <!--xml dependency injections-->
-    <!--<bean class="org.itstep.myWebApp.repository.UserRepository" id="userRepository"/>-->
+    <!--<bean class="org.itstep.myWebApp.repository.mock.UserRepository" id="userRepository"/>-->
     <!--<bean class="org.itstep.myWebApp.service.UserService" id="userService">-->
         <!--<property name="repository" ref="userRepository"/> &lt;!&ndash;need setter in the class&ndash;&gt;-->
     <!--</bean>-->
