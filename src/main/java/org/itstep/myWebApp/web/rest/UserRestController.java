@@ -6,10 +6,13 @@ import org.itstep.myWebApp.util.ErrorInfo;
 import org.itstep.myWebApp.util.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import static org.springframework.http.MediaType.*;
+
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,12 +28,19 @@ public class UserRestController {
         return new ErrorInfo(request.getRequestURL().toString(), exception.getMessage());
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(Exception.class)
+    @ResponseBody ErrorInfo handleOther(HttpServletRequest request, Exception exception){
+        return new ErrorInfo(request.getRequestURL().toString(), exception.getMessage());
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return service.getAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public User getbyId(@PathVariable(value = "id") Integer id) {
         return service.getById(id);
     }
@@ -40,15 +50,15 @@ public class UserRestController {
         service.delete(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = APPLICATION_JSON_VALUE)
     public void update(@PathVariable Integer id, @RequestBody User user) {
         user.setId(id);
         service.save(user);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    private void create(@RequestBody User user) {
-        service.save(user);
+    @RequestMapping(method = RequestMethod.POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    public User create(@Valid @RequestBody User user) {
+        return service.save(user);
     }
 
 }
