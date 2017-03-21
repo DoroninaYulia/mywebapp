@@ -7,7 +7,7 @@
     <context:property-placeholder location="classpath:db/db.properties"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="username" value="${database.username}"/>
+        <property name="username" value="${database.name}"/>
         <property name="password" value="${database.password}"/>
         <property name="url" value="${database.url}"/>
         <property name="driverClassName" value="${database.driver}"/>
