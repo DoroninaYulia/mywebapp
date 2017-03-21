@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-@ContextConfiguration("classpath:spring.xml")
+@ContextConfiguration("classpath:spring/spring.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest {
 
