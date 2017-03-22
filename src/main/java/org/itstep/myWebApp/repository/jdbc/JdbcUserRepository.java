@@ -9,20 +9,19 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-
 import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
 public class JdbcUserRepository implements UserRepository {
 
-    private SimpleJdbcInsert insert;
+/*    private SimpleJdbcInsert insert;
 
     public JdbcUserRepository(DataSource dataSource) {
         this.insert = new SimpleJdbcInsert(dataSource)
                 .withTableName("users")
                 .usingColumns("id");
-    }
+    }*/
 
     private final BeanPropertyRowMapper<User> rowMapper = BeanPropertyRowMapper.newInstance(User.class);
 
