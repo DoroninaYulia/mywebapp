@@ -11,12 +11,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @ContextConfiguration({"classpath:spring/spring.xml", "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath: db/initDB.sql")
+@Sql(scripts = "classpath:db/initDB.sql")
 public class UserServiceTest {
 
     @Autowired
@@ -25,14 +26,15 @@ public class UserServiceTest {
     @Test
     public void getAll() throws Exception {
         List<User> users = service.getAll();
-        Assert.assertEquals(8, users.size());
+        Assert.assertEquals(4, users.size());
     }
 
     @Test
     @DirtiesContext
+    @Transactional
     public void delete() throws Exception {
-        service.delete(1);
-        Assert.assertEquals(1, service.getAll().size());
+        service.delete(4);
+        Assert.assertEquals(4, service.getAll().size());
     }
 
     @Test(expected = NotFoundException.class)
@@ -41,9 +43,11 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void save() throws Exception {
-        User user = new User();
-
+        service.save(UserTestData.USER);
+        User user = service.getById(1);
+        Assert.assertEquals(UserTestData.USER, user);
     }
 
     @Test(expected = NotFoundException.class)
