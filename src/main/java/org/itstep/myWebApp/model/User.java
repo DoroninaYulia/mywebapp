@@ -8,22 +8,24 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import static org.itstep.myWebApp.model.User.GET_ALL;
+
 @Entity
 @Table(name = "users")
-@NamedQuery(name="User.GET_ALL", query = "SELECT u FROM User u")
+@NamedQuery(name = GET_ALL, query = "SELECT u FROM User u")
 public class User extends BaseEntity {
 
     public static final String GET_ALL = "User.getAll";
 
-    @Column(name = "LastName")
+    @Column(name = "lastName")
     private String lastname;
 
-    @Column(name = "City")
+    @Column(name = "city")
     @NotNull(message = "city can not be null")
     private String city;
 
     @Email
-    @Column(name = "Email", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     public User() {

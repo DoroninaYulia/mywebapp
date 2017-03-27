@@ -1,21 +1,19 @@
-/*DROP TABLE IF EXISTS users;*/
-DELETE FROM users;
+/*CREATE DATABASE userDB;*/
+USE userDB;
 
-/*CREATE TABLE users(
-  *//*id INTEGER PRIMARY KEY AUTO_INCREMENT,*//*
-  id int IDENTITY PRIMARY KEY,
-  name VARCHAR(50),
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  id       INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  name     VARCHAR(50),
   lastname VARCHAR(50),
-  city VARCHAR(50),
-  email VARCHAR(50)
-);*/
+  city     VARCHAR(50),
+  email    VARCHAR(50) UNIQUE NOT NULL
+);
 
-INSERT INTO users VALUES('nickDB', 'dallsDB', 'dniproDB', 'user@gmail.comDB');
-INSERT INTO users VALUES('nickDB', 'dallsDB', 'dniproDB', 'user@gmail.comDB');
-INSERT INTO users VALUES('nickDB', 'dallsDB', 'dniproDB', 'user@gmail.comDB');
-INSERT INTO users VALUES('nickDB', 'dallsDB', 'dniproDB', 'user@gmail.comDB');
+INSERT INTO users VALUES (NULL, 'nickDB', 'dallsDB', 'dniproDB', 'ser@gmail.comDB');
+INSERT INTO users VALUES (NULL, 'nickDB', 'dallsDB', 'dniproDB', 'use@gmail.comDB');
+INSERT INTO users VALUES (NULL, 'nickDB', 'dallsDB', 'dniproDB', 'user@gmail.comDB');
+INSERT INTO users VALUES (NULL, 'nickDB', 'dallsDB', 'dniproDB', 'uer@gmail.comDB');
 
-/*INSERT INTO users VALUES(NULL , "angelaDB", "hikeDB", "kyivDB", "ang@yahoo.comDB");
-INSERT INTO users VALUES(NULL , "nickDB", "hikeDB", "kyivDB", "userang@yahoo.comDB");*/
-
-/*SELECT *FROM users;*/
+SELECT *FROM users;

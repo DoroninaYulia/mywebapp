@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,6 +17,7 @@ import java.util.List;
 @ContextConfiguration({"classpath:spring/spring.xml", "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/initDB.sql")
+@Transactional
 public class UserServiceTest {
 
     @Autowired
@@ -30,11 +30,9 @@ public class UserServiceTest {
     }
 
     @Test
-    @DirtiesContext
-    @Transactional
     public void delete() throws Exception {
-        service.delete(4);
-        Assert.assertEquals(4, service.getAll().size());
+        service.delete(1);
+        Assert.assertEquals(3, service.getAll().size());
     }
 
     @Test(expected = NotFoundException.class)
@@ -43,21 +41,19 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
     public void save() throws Exception {
-        service.save(UserTestData.USER);
-        User user = service.getById(1);
-        Assert.assertEquals(UserTestData.USER, user);
+        User user = service.save(UserTestData.USER);
+        Assert.assertEquals(user, service.getById(5));
     }
 
     @Test(expected = NotFoundException.class)
     public void updateNotFound() throws Exception {
-        service.update(UserTestData.USER_3);
+        service.update(service.getById(0));
     }
 
     @Test
     public void getById() throws Exception {
-        User user = service.getById(1);
+        Assert.assertNotNull(service.getById(1));
     }
 
 }

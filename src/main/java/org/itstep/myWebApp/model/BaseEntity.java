@@ -37,7 +37,6 @@ public class BaseEntity {
 
         if (id != null ? !id.equals(baseEntity.id) : baseEntity.id != null) return false;
         return name != null ? name.equals(baseEntity.name) : baseEntity.name == null;
-
     }
 
     @Override

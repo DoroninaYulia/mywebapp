@@ -31,13 +31,4 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-        <!--<servlet-name>MyServlet</servlet-name>-->
-        <!--<servlet-class>org.itstep.myWebApp.web.servlet.UserServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MyServlet</servlet-name>-->
-        <!--<url-pattern>/users</url-pattern>-->
-    <!--</servlet-mapping>-->
-
 </web-app>

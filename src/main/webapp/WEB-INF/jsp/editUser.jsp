@@ -19,7 +19,7 @@
         <dt><input type="text" name="city" value="${user.city}"></dt>
 
         <dl>Email:</dl>
-        <dt><input type="email" name="email" value="${user.email}"></dt>
+        <dt><input type="email" name="email" required value="${user.email}"></dt>
 
         <button type="submit">SAVE</button>
     </form>

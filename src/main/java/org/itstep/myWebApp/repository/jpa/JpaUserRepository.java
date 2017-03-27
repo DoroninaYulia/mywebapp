@@ -1,6 +1,5 @@
 package org.itstep.myWebApp.repository.jpa;
 
-
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.repository.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -8,9 +7,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class JpaUserRepository implements UserRepository {
 
     @PersistenceContext
