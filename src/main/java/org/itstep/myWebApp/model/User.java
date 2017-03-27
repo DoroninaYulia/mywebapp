@@ -2,16 +2,25 @@ package org.itstep.myWebApp.model;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-public class User extends Entity {
+@Entity
+@Table(name = "users")
+@NamedQueries(@NamedQuery(name = User.GET_ALL, query = "SELECT u FROM User u"))
+public class User extends BaseEntity {
 
+    public static final String GET_ALL = "User.getAll";
+
+    @Column(name = "lastname")
     private String lastname;
 
     @NotNull(message = "city can not be null")
+    @Column(name = "city")
     private String city;
 
     @Email
+    @Column(name = "email", unique = true)
     private String email;
 
     public User() {

@@ -12,7 +12,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-@ContextConfiguration({"classpath:spring.xml", "classpath:spring-mvc.xml"})
+@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/spring-mvc.xml"})
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class WebTest {

@@ -1,9 +1,19 @@
 package org.itstep.myWebApp.model;
 
-public class Entity {
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.*;
+
+@MappedSuperclass
+public class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     protected Integer id;
 
+    @NotEmpty
+    @Column(name = "name", nullable = false)
     protected String name;
 
     public Integer getId() {
@@ -25,12 +35,12 @@ public class Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Entity)) return false;
+        if (!(o instanceof BaseEntity)) return false;
 
-        Entity entity = (Entity) o;
+        BaseEntity baseEntity = (BaseEntity) o;
 
-        if (id != null ? !id.equals(entity.id) : entity.id != null) return false;
-        return name != null ? name.equals(entity.name) : entity.name == null;
+        if (id != null ? !id.equals(baseEntity.id) : baseEntity.id != null) return false;
+        return name != null ? name.equals(baseEntity.name) : baseEntity.name == null;
 
     }
 
@@ -43,7 +53,7 @@ public class Entity {
 
     @Override
     public String toString() {
-        return "Entity{" +
+        return "BaseEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

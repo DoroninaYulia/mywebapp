@@ -9,7 +9,7 @@ public class SpringExample {
 
     public static void main(String[] args) {
 
-        try (ClassPathXmlApplicationContext appCtx = new ClassPathXmlApplicationContext("spring.xml")) {
+        try (ClassPathXmlApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
             System.out.println(Arrays.toString(appCtx.getBeanDefinitionNames()));
 
             UserService service = appCtx.getBean(UserService.class);

@@ -1,8 +1,10 @@
 package org.itstep.myWebApp.model;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
-public class Mail extends Entity {
+@Entity
+public class Mail extends BaseEntity {
 
     private String text;
 
