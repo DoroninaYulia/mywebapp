@@ -4,24 +4,20 @@ import org.itstep.myWebApp.UserTestData;
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.util.NotFoundException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/initDB.sql")
-public class UserServiceTest {
+public abstract class UserServiceTest {
 
     @Autowired
-    private UserService service;
+    protected UserService service;
 
     @Test
     public void getAll() throws Exception {
@@ -31,7 +27,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
+    @DirtiesContext
     public void delete() throws Exception {
         service.delete(1);
         Assert.assertEquals(1, service.getAll().size());
@@ -43,11 +39,12 @@ public class UserServiceTest {
     }
 
     @Test
-    @Transactional
+    @DirtiesContext
     public void save() throws Exception {
-        User save = service.save(UserTestData.USER_4);
-        UserTestData.USER_4.setId(3);
-        Assert.assertEquals(UserTestData.USER_4, save);
+        User user = new User("111", "111", "111", "111@asd.com");
+        User save = service.save(user);
+        user.setId(3);
+        Assert.assertEquals(user, save);
         Assert.assertEquals(3, service.getAll().size());
     }
 

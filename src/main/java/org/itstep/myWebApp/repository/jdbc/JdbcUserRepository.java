@@ -3,6 +3,8 @@ package org.itstep.myWebApp.repository.jdbc;
 import org.itstep.myWebApp.model.User;
 import org.itstep.myWebApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -48,8 +50,6 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User save(User user) {
 
-        System.out.println(user);
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("name", user.getName());
         map.addValue("lastname", user.getLastname());
@@ -66,13 +66,15 @@ public class JdbcUserRepository implements UserRepository {
                             "WHERE id=:id", map);
         }
 
-        System.out.println(user);
-
         return user;
     }
 
     @Override
     public User getById(Integer id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE users.id=?", rowMapper, id);
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM users WHERE users.id=?", rowMapper, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }
