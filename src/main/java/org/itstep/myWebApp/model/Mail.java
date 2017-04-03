@@ -1,17 +1,25 @@
 package org.itstep.myWebApp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "mails")
 public class Mail extends BaseEntity {
 
+    @Column(name = "text")
     private String text;
 
+    @Column(name = "to")
     private String to; // email
 
+    @Column(name = "created")
     private LocalDateTime created;
 
+    @Column(name = "userId")
     private Integer userId; // owner
 
     public Mail() {

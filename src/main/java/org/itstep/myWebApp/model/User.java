@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +23,9 @@ public class User extends BaseEntity {
     @Email
     @Column(name = "email", unique = true)
     private String email;
+
+/*    @OneToMany
+    private List<Mail> mails;*/
 
     public User() {
     }

@@ -33,6 +33,9 @@
         <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
             <constructor-arg ref="dataSource"/>
         </bean>
+
+       <!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="entityManagerFactory"/>-->
     </beans>
 
     <beans profile="jpa,datajpa">
@@ -42,13 +45,25 @@
               p:dataSource-ref="dataSource"
               p:packagesToScan="org.itstep.myWebApp.model">
 
+           <!-- <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="create-drop"/>
+
+                   &lt;!&ndash; <entry key="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+                    <entry key="javax.persistence.schema-generation.scripts.create-target" value="D://kovalchuk/Projects/myWebApp/config/ddl/create.ddl"/>
+                    <entry key="javax.persistence.schema-generation.scripts.create-target" value="D://kovalchuk/Projects/myWebApp/config/ddl/drop.ddl"/>&ndash;&gt;
+                </map>
+            </property>-->
+
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
             </property>
+
         </bean>
 
         <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
               p:entityManagerFactory-ref="entityManagerFactory"/>
+
     </beans>
 
     <beans profile="jpa">

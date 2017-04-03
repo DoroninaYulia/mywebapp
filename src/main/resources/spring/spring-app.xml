@@ -17,4 +17,6 @@
     <context:annotation-config/>
     <context:component-scan base-package="org.itstep.myWebApp.service"/>
 
+    <import resource="spring-cache.xml"/>
+
 </beans>
