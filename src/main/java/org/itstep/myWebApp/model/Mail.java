@@ -1,6 +1,10 @@
 package org.itstep.myWebApp.model;
 
+import org.hibernate.annotations.OnDelete;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,6 +17,9 @@ public class Mail extends BaseEntity {
     private LocalDateTime created;
 
     private Integer userId; // owner
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private User user;
 
     public Mail() {
     }

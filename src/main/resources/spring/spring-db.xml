@@ -42,6 +42,16 @@
               p:dataSource-ref="dataSource"
               p:packagesToScan="org.itstep.myWebApp.model">
 
+            <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="create-drop"/>
+
+                    <!--<entry key="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
+                    <!--<entry key="javax.persistence.schema-generation.scripts.create-target" value="D://kovalchuk/Projects/myWebApp/config/ddl/create.ddl"/>-->
+                    <!--<entry key="javax.persistence.schema-generation.scripts.drop-target" value="D://kovalchuk/Projects/myWebApp/config/ddl/drop.ddl"/>-->
+                </map>
+            </property>
+
             <property name="jpaVendorAdapter">
                 <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
             </property>
