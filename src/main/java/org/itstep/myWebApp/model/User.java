@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,8 +25,21 @@ public class User extends BaseEntity {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToMany
-    private List<Mail> mails;
+    @NotNull
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "user_id"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roleSet;
+
+/*    @OneToMany
+    private List<Mail> mails;*/
 
     public User() {
     }
