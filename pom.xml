@@ -13,6 +13,7 @@
         <java.version>1.8</java.version>
         <spring.version>4.3.7.RELEASE</spring.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <spring.security>4.2.2.RELEASE</spring.security>
     </properties>
 
     <dependencies>
@@ -43,6 +44,18 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.7</version>
+        </dependency>
+
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security}</version>
         </dependency>
 
         <!--test-->

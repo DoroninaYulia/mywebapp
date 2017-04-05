@@ -38,6 +38,7 @@ public class UserService {
         repository.save(user);
     }
 
+    @Cacheable(value = "cacheTest")
     public User getById(Integer id) {
         return ExceptionUtil.check(repository.getById(id), id);
     }
